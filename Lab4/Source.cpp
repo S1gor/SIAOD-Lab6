@@ -56,8 +56,8 @@ void print(int* mas, int size, const char* message)
 
 int main()
 {
-	const int size = 6;
-	int mas[size] = { 2,20,30,40,50,60 };
+	const int size = 8;
+	int mas[size] = { 8,7,6,5,4,3,2,1 };
 	int steps = 0;
 
 	print(mas, size, "Before sorting:\t");
