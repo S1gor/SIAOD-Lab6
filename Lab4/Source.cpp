@@ -21,52 +21,48 @@ void bubbleSort(int* mas, int size, int& steps)
 			}
 			steps++;
 		}
-		if (flag)
-			break;
+		if (flag)	break;
 	}
 }
 
-void selectionSort(int* mas, int size, int& steps)
-{
-	int min_idx;
-	for (int i = 0; i < size - 1; i++)
-	{
-		min_idx = i;
-		for (int j = i + 1; j < size; j++)
-		{
-			if (mas[j] < mas[min_idx])
-				min_idx = j;
-			steps++;
-		}
-		if (min_idx != i)
-			swap(mas[min_idx], mas[i]);
-	}
-}
-
-void ñombSort(int* mas, int size, int& steps)
+int getNextStep(int step)
 {
 	const float factor = 1.247;
-	float step = size - 1;
+	step /= factor;
 
-	while (step > 1)
+	if (step < 1)
+		return 1;
+	return step;
+}
+
+void combSort(int* mas, int size, int& steps)
+{
+	int step = size;
+
+	bool flag = true;
+	while (step != 1 || flag)
 	{
-		for (int i = 0; i + step < size; i++)
+		step = getNextStep(step);
+		flag = false;
+		for (int i = 0; i < size - step; i++)
 		{
-			if (mas[i] > mas[int(i + step)])
-				swap(mas[i], mas[int(i + step)]);
+			if (mas[i] > mas[i + step])
+			{
+				swap(mas[i], mas[i + step]);
+				flag = true;
+			}
 			steps++;
 		}
-		step /= factor;
 	}
 }
 
 int selectSort()
 {
 	int choice;
-	printf("Choose: 1 - bubble sort, 2 - selection sort , 3 - combSort;\nChoice:");
+	printf("Choose: 1 - bubble sort, 2 - combSort;\nChoice:");
 	do {
 		scanf_s("%d", &choice);
-	} while (choice > 3 || choice < 1);
+	} while (choice > 2 || choice < 1);
 	printf("\n");
 	return choice;
 }
@@ -81,11 +77,8 @@ void print(int* mas, int size, const char* message)
 int main()
 {
 	const int size = 8;
-	//int mas[size] = { 2,3,4,5,6,1,7,8 };
-	//int mas[size] = { 1,2,3,4,8,7,6,5 };
-	//int mas[size] = { 8,7,6,5,1,2,3,4 };
-	//int mas[size] = { 8,7,6,5,4,3,2,1 };
-	int mas[size] = { 1,2,3,4,5,6,7,8 };
+	int mas[size] = { 1,2,3,4,8,7,6,5 };
+
 	int steps = 0;
 
 	print(mas, size, "Before sorting:\t");
@@ -97,10 +90,7 @@ int main()
 		bubbleSort(mas, size, steps);
 		break;
 	case 2:
-		selectionSort(mas, size, steps);
-		break;
-	case 3:
-		ñombSort(mas, size, steps);
+		combSort(mas, size, steps);
 		break;
 	}
 	
