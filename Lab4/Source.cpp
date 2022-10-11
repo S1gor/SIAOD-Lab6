@@ -76,14 +76,13 @@ void print(int* mas, int size, const char* message)
 
 int main()
 {
-	const int size = 8;
-	int mas[size] = { 1,2,3,4,8,7,6,5 };
+	const int size = 24;
+	int mas[size] = { 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24 };
 
 	int steps = 0;
-
 	print(mas, size, "Before sorting:\t");
 	printf("\n\n");
-
+	
 	switch (selectSort())
 	{
 	case 1:
