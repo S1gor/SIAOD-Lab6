@@ -30,9 +30,7 @@ int getNextStep(int step)
 	const float factor = 1.247;
 	step /= factor;
 
-	if (step < 1)
-		return 1;
-	return step;
+	return step < 1 ? 1 : step;
 }
 
 void combSort(int* mas, int size, int& steps)
@@ -76,8 +74,8 @@ void print(int* mas, int size, const char* message)
 
 int main()
 {
-	const int size = 24;
-	int mas[size] = { 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24 };
+	const int size = 8;
+	int mas[size] = { 8,7,6,5,4,3,2,1 };
 
 	int steps = 0;
 	print(mas, size, "Before sorting:\t");
